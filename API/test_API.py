@@ -2,8 +2,7 @@ from flask import Flask, json, request, jsonify, send_from_directory
 import os
 import urllib.request
 from werkzeug.utils import secure_filename
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
+from PIL import Image
 
 app = Flask(__name__)
  
@@ -59,14 +58,14 @@ def upload_file():
 @app.route('/image/<filename>')
 def display_image(filename):
     return send_from_directory('images', filename)
- 
 
-
-
-
-
-
-
+#Wann soll diese Methode durchlaufen werden ?
+def image_rotate(filename): 
+    bild = "hallo1"
+    myImage = Image.open(f"images\input_Images\{bild}.png")
+    rotated_image = myImage.rotate(90, expand=True)
+    rotated_image.show()
+    rotated_image.save(f"images\processed_Images\{bild}p1.png")
 
  
 if __name__ == '__main__':
