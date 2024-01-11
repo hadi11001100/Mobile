@@ -6,9 +6,8 @@ from PIL import Image
 
 app = Flask(__name__)
  
-app.secret_key = "caircocoders-ednalan"
- 
-UPLOAD_FOLDER = 'images'
+UPLOAD_FOLDER = 'images\input_Images'
+DOWNLOAD_FOLDER = 'images\processed_Images'
 
 # Maximal zulässige Dateigröße
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
@@ -57,15 +56,15 @@ def upload_file():
 # Man kann sich das Bild aus dem Ordner selber aussuchen 
 @app.route('/image/<filename>')
 def display_image(filename):
-    return send_from_directory('images', filename)
+    image_rotate(filename)
+    return send_from_directory('images\processed_Images', filename)
 
 #Wann soll diese Methode durchlaufen werden ?
 def image_rotate(filename): 
-    bild = "hallo1"
-    myImage = Image.open(f"images\input_Images\{bild}.png")
+    myImage = Image.open(f"images\input_Images\{filename}")
     rotated_image = myImage.rotate(90, expand=True)
     rotated_image.show()
-    rotated_image.save(f"images\processed_Images\{bild}p1.png")
+    rotated_image.save(os.path.join(DOWNLOAD_FOLDER, filename))
 
  
 if __name__ == '__main__':
