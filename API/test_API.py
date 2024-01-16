@@ -6,8 +6,8 @@ from PIL import Image
 
 app = Flask(__name__)
  
-UPLOAD_FOLDER = 'images\input_Images'
-DOWNLOAD_FOLDER = 'images\output_Images'
+UPLOAD_FOLDER = 'API\images\input_Images'
+DOWNLOAD_FOLDER = 'API\images\output_Images'
 
 # Maximal zulässige Dateigröße
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
@@ -58,10 +58,10 @@ def upload_file():
 @app.route('/image/<filename>')
 def display_image(filename):
     #image_rotate(filename)
-    return send_from_directory('images\processed_Images', filename)
+    return send_from_directory('images\output_Images', filename)
 
 def image_rotate(filename): 
-    myImage = Image.open(f"images\input_Images\{filename}")
+    myImage = Image.open(f"API\images\input_Images\{filename}")
     rotated_image = myImage.rotate(90, expand=True)
     #rotated_image.show()
     rotated_image.save(os.path.join(DOWNLOAD_FOLDER, filename))
