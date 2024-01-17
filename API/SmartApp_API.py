@@ -1,3 +1,9 @@
+#TODO Globale Variable kommt vor den Methoden
+#TODO The Dataset Preparation kommt vor den Methoden 
+#TODO XML und jpg files kommt vor den Methoden 
+#Kernfunktionen: Bildverarbeitung, Objekterkennung, Handschrifterkennung
+#Für den 
+
 from flask import Flask, json, request, jsonify, send_from_directory
 import os
 import urllib.request
